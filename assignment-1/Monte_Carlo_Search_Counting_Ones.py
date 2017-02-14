@@ -1,26 +1,29 @@
 
 # coding: utf-8
 
-# In[79]:
+# In[8]:
 
 get_ipython().magic('matplotlib inline')
-from bitarray import bitarray
+import numpy as np
 import matplotlib.pyplot as plt
 
-def counting_ones(bitarray_instance):
-    return bitarray_instance.count(True)
+def generate_random_bit_array(length):
+    return np.random.randint(2, size=(length,))
 
-def binary_monte_carlo(objective_function, bitarray_length, evaluations):
+def counting_ones(arr):
+    return np.sum(arr)
+
+def binary_monte_carlo(objective_function, array_length, evaluations):
     print('Performing binary monte carlo search...')
     
     # Generate random bitarray of length 'bitarray_length'
-    best_bitarray = bitarray(bitarray_length)
+    best_bitarray = generate_random_bit_array(array_length)
     # Get the fitness of the current solution
     best_fitness = objective_function(best_bitarray)
     fitness_history = [best_fitness]
     
     for x in range(0, evaluations):
-        tmp_best_bitarray = bitarray(bitarray_length)
+        tmp_best_bitarray = generate_random_bit_array(array_length)
         tmp_best_fitness = objective_function(tmp_best_bitarray)
         
         if tmp_best_fitness >= best_fitness:
@@ -31,7 +34,7 @@ def binary_monte_carlo(objective_function, bitarray_length, evaluations):
         
     axes = plt.gca()
     axes.set_xlim([0,evaluations])
-    axes.set_ylim([0,bitarray_length])    
+    axes.set_ylim([0,array_length])    
     plt.plot(fitness_history)
     plt.xlabel('evaluations')
     plt.ylabel('fitness')
@@ -40,7 +43,7 @@ def binary_monte_carlo(objective_function, bitarray_length, evaluations):
     plt.show()
     return [best_bitarray, best_fitness]
     
-result = binary_monte_carlo(counting_ones, 100, 10)
+result = binary_monte_carlo(counting_ones, 100, 1500)
 
 print("Best bit sequence: " + str(result[0]))
 print("Best fitness: " + str(result[1]))

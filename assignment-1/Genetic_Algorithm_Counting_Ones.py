@@ -1,29 +1,32 @@
 
 # coding: utf-8
 
-# In[20]:
+# In[3]:
 
 get_ipython().magic('matplotlib inline')
-from bitarray import bitarray
+import numpy as np
 import matplotlib.pyplot as plt
 import random
 import copy
 
-def counting_ones(bitarray_instance):
-    return bitarray_instance.count(True)
+def generate_random_bit_array(length):
+    return np.random.randint(2, size=(length,))
 
-def multi_flip_binary(bitarray_instance, probability):
-    for idx, val in enumerate(bitarray_instance):
+def counting_ones(arr):
+    return np.sum(arr)
+
+def multi_flip_binary(arr, probability):
+    for idx, val in enumerate(arr):
         if random.random() < probability:
-            bitarray_instance[idx] = not bitarray_instance[idx]
-    return bitarray_instance        
+            arr[idx] = not arr[idx]
+    return arr        
 
 
-def genetic_algorithm(objective_function, bitarray_length, evaluations):
+def genetic_algorithm(objective_function, array_length, evaluations):
     print('Performing (1+1)-GA')
     
     # (a) Generate random bitarray of length 'bitarray_length'
-    best_bitarray = bitarray(bitarray_length)
+    best_bitarray = generate_random_bit_array(array_length)
     # Get the fitness of the current solution
     best_fitness = objective_function(best_bitarray)
     fitness_history = [best_fitness]
@@ -32,7 +35,7 @@ def genetic_algorithm(objective_function, bitarray_length, evaluations):
     for x in range(0, evaluations):
         # (b) Create a copy of this bitarray and invert each bit with probability 1/n
         best_bitarray_copy = copy.deepcopy(best_bitarray)
-        mutated_bitarray = multi_flip_binary(best_bitarray_copy, 1/bitarray_length)
+        mutated_bitarray = multi_flip_binary(best_bitarray_copy, 1/array_length)
         mutated_bitarray_fitness = objective_function(mutated_bitarray)
         
         # (c) take the mutant if it is closer to the goal sequence
@@ -44,7 +47,7 @@ def genetic_algorithm(objective_function, bitarray_length, evaluations):
         
     axes = plt.gca()
     axes.set_xlim([0,evaluations])
-    axes.set_ylim([0,bitarray_length])    
+    axes.set_ylim([0,array_length])    
     plt.plot(fitness_history)
     plt.xlabel('evaluations')
     plt.ylabel('fitness')
