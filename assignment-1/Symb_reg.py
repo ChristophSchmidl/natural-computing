@@ -5,6 +5,7 @@ import math
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # GENETIC PROGRAMMING LIB
 from deap import algorithms, base, creator, tools, gp
@@ -39,10 +40,9 @@ pset.addPrimitive(operator.sub, 2)
 pset.addPrimitive(operator.mul, 2)
 pset.addPrimitive(protectedDiv, 2)
 pset.addPrimitive(protectedLog, 1)
-#pset.addPrimitive(protectedExp, 1)
+pset.addPrimitive(protectedExp, 1)
 pset.addPrimitive(math.cos, 1)
 pset.addPrimitive(math.sin, 1)
-pset.addEphemeralConstant("rand101", lambda: random.randint(-5,5))
 pset.renameArguments(ARG0='x')
 
 # BASICALLY SETTING THE UP THE FITNESS
@@ -71,7 +71,7 @@ def evalSymbReg(individual):
 	return math.fsum(abs_err)/21,
 
 toolbox.register("evaluate", evalSymbReg)
-toolbox.register("select", tools.selTournament, tournsize = 2)
+toolbox.register("select", tools.selTournament, tournsize = 5)
 toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genFull, min_ = 0, max_ = 2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
@@ -86,34 +86,55 @@ def main(p_cross, p_mut, seed):
 	# THE SIZE OF OUR POPULATION AND HALL OF FAMER(S) ...
 	pop = toolbox.population(n = 1000)
 	hof = tools.HallOfFame(1)
+	hof.update(pop)
 	
-	# USED TO RECORD THE 'STATS' OF OUR EVOLUTION
-	stats_fit = tools.Statistics(key = lambda ind: ind.fitness.values)
-	stats_size = tools.Statistics(key = len)
-	stats_fit.register("avg", np.mean)
-	stats_fit.register("std", np.std)
-	stats_fit.register("min", np.min)
-	stats_fit.register("max", np.max)
-	stats_size.register("avg", np.mean)
-	stats_size.register("min", np.min)
-	stats_size.register("max", np.max)
-	mstats = tools.MultiStatistics(fitness = stats_fit, size = stats_size)
+	# KEEP TRACK OF STATS OF THE BEST INDIVIDUAL
+	fit_b = np.zeros((51, 1))
+	sz_b = np.zeros((51, 1))
+	gen = np.linspace(1, 50, 50)
 	
-
-	# LET THE GENETIC ALGORITHM RUN, WE INPUT SOME CONSTANTS AND OUR TOOLBOX
-	pop, log = algorithms.eaSimple(pop, toolbox, p_cross, p_mut, 50, stats = mstats, halloffame = hof, verbose = False)
+	# ALGORITHM IMPLEMENATION
+	for g in range(51):
+		# OBTAIN HALL OF FAMER FROM THE CURRENT GENERATION
+		hof.remove(0)
+		hof.update(pop)
+		fit_b[g] = evalSymbReg(hof[0])
+		sz_b[g] = len(hof[0])
+		
+		# CREATE OFFSPRING FROM CURRENT POPULATION
+		offspring = toolbox.select(pop, 1000)
+		offspring = algorithms.varAnd(offspring, toolbox, p_cross, p_mut)
+		
+		# EVALUATE OFFSPRING, WITH SMALL IMPLEMENTATION TO ENSURE VALID FITNESS SCORES
+		invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+		fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+		for ind, fit in zip(invalid_ind, fitnesses):
+			ind.fitness.values = fit
+		
+		# REPLACE THE POPULATION ...
+		pop = offspring
 	
-	# OUTPUT THE STATS
-	print log
-	print 'best solution: {}'.format(hof[0])
-	print 'length best solution: {}'.format(len(hof[0]))
+	# SET PLOT STYLE ELEMENTS
+	sns.set(style="ticks")
 	
-	plt.plot(log.select("gen"), log.chapters["fitness"].select("min"))
+	# PLOT THE BEST FITNESS
+	plt.figure(1)
+	plt.plot(gen, fit_b[1:51])
 	plt.xlabel('Generation')
-	plt.ylabel('Best fitness')
-	plt.xlim([0, 50])
+	plt.ylabel('Fitness of best individual')
+	plt.xlim([1, 50])
 	plt.ylim(ymin = 0)
+
+	# PLOT THE SIZE OF BEST FITNESS
+	plt.figure(2)
+	plt.plot(gen, sz_b[1:51])
+	plt.xlabel('Generation')
+	plt.ylabel('Size of best individual')
+	plt.xlim([1, 50])
+	plt.ylim(ymin = 0)
+	
 	plt.show()
+
 	
 
 if __name__ == "__main__":
