@@ -2,6 +2,7 @@
 
 \usepackage[english]{babel}
 \usepackage{amsmath}
+\usepackage{float}
 \usepackage{amssymb}
 \usepackage{dsfont}
 \usepackage{graphicx}
@@ -91,8 +92,20 @@ Let the algorithm produce as outputs:
 	\item Use $n = 100$ and for a run of 1500 iterations, plot the best fitness against the elapsed number of iterations.\\
 	\textbf{Solution:}\\
 	
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.8\textwidth]{images/monte_carlo_1500_iterations.png}
+	\end{figure}	
+	
+	
 	\item Now do ten runs. How many times the algorithm finds the optimum? Almost never.\\
 	\textbf{Solution:}\\
+	
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.8\textwidth]{images/monte_carlo_10_iterations.png}
+	\end{figure}	
+	
 	
 	
 \end{enumerate}			
@@ -113,8 +126,21 @@ Let the algorithm produce as outputs:
 		\item Use $n = 100$ and a mutation rate $p = 1/n$. For a run of 1500 iterations, plot the best fitness against the elapsed number of iterations.\\
 		\textbf{Solution:}\\
 		
+		
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.8\textwidth]{images/GA_1500_iterations.png}
+	\end{figure}
+		
+		
 		\item Now do ten runs. How many times the algorithm finds the optimum?\\
 		\textbf{Solution:}\\
+		
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.8\textwidth]{images/GA_10_iterations.png}
+	\end{figure}		
+		
 		
 		
 		\item Is there a difference in performance compared to the Monte-Carlo Search algorithm? Justify your answer.\\
