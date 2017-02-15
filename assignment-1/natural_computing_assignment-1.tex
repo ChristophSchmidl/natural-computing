@@ -164,17 +164,32 @@ Plot the following:
 \begin{enumerate}
 	\item best of generatation fitness (y-axis) versus generation (x-axis)\\
 	\textbf{Solution:}\\
+	\begin{figure}[ht!]
+	\centering
+  	\includegraphics[width=0.5\textwidth]{SR_fit.png}
+	\end{figure}
 	
 	\item best of generation size (y-axis) versus generation (x-axis).\\
 	\textbf{Solution:}\\
+	\begin{figure}[ht!]
+	\centering
+  	\includegraphics[width=0.5\textwidth]{SR_sz.png}
+	\end{figure}
+	
 \end{enumerate}
 
 Can you observe any undesirable phenomenon from these plots? In case of positive answer, explain how you would try to overcome the corresponding problem (you can refer to the literature).\\
 \textbf{Solution:}\\
+The size keeps increasing. It seems that the algorithm is overfitting a 'wrong' solution by adding extra terms such that it fits the data. A possible countermeasure is to incorporate the size of the tree into the fitness and punish large trees.
+
+The code regarding this exercise can be found at our Git Repository:
+
+\begin{itemize}
+	\item Pure Python file: \url{https://github.com/ChristophSchmidl/natural-computing/blob/master/assignment-1/Symb_reg.py}
+\end{itemize}	
+		
 
 \end{enumerate}
-
-
 
 
 
