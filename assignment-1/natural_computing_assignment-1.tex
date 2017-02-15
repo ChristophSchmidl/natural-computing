@@ -138,6 +138,13 @@ Let the algorithm produce as outputs:
 	\item Use $n = 100$ and for a run of 1500 iterations, plot the best fitness against the elapsed number of iterations.\\
 	\textbf{Solution:}\\
 	
+The code regarding this exercise can be found at our Git Repository:
+
+\begin{itemize}
+	\item Jupyther Notebook file: \url{https://github.com/ChristophSchmidl/natural-computing/blob/master/assignment-1/Monte_Carlo_Search_Counting_Ones.ipynb}
+	\item Pure Python file: \url{https://github.com/ChristophSchmidl/natural-computing/blob/master/assignment-1/Monte_Carlo_Search_Counting_Ones.py}
+\end{itemize}	
+	
 	\begin{figure}[H]
 	\centering
   	\includegraphics[width=0.8\textwidth]{images/monte_carlo_1500_iterations.png}
@@ -172,6 +179,12 @@ Let the algorithm produce as outputs:
 		\item Use $n = 100$ and a mutation rate $p = 1/n$. For a run of 1500 iterations, plot the best fitness against the elapsed number of iterations.\\
 		\textbf{Solution:}\\
 		
+The code regarding this exercise can be found at our Git Repository:
+
+\begin{itemize}
+	\item Jupyther Notebook file: \url{https://github.com/ChristophSchmidl/natural-computing/blob/master/assignment-1/Genetic_Algorithm_Counting_Ones.ipynb}
+	\item Pure Python file: \url{https://github.com/ChristophSchmidl/natural-computing/blob/master/assignment-1/Genetic_Algorithm_Counting_Ones.py}
+\end{itemize}			
 		
 	\begin{figure}[H]
 	\centering
@@ -191,6 +204,9 @@ Let the algorithm produce as outputs:
 		
 		\item Is there a difference in performance compared to the Monte-Carlo Search algorithm? Justify your answer.\\
 		\textbf{Solution:}\\
+
+Yes, the performance of the (1+1)-GA approach is performing much better than the monte carlo approach and converges faster to the optimal solution. The probability of each bit in the monte carlo approach is set to 0.5. If the optimal fitness value is set to 100, then the average solution is expected to be around 50 as we can observe in exercise 3. Because the (1+1)GA-approach starts with a random sequence and then sets the probability of flipping a bit to $\frac{1}{100}$ in this case, the resulting mutated bitsequences are less random. By keeping the mutated bitsequence with the best fitness in each iteration and only mutating bits with a probability of 1 out of 100, this approach performs better when the amount of iterations is relatively high. If the amount of iterations is low, then the performance boost of the GA-approach is not significant.		
+		
 	\end{enumerate}
 	
 	
