@@ -31,7 +31,7 @@
   \and
   Koen Vijverberg\\ s1337\\     \texttt{koen@example.com}
   \and
-  Alex\\	s1337\\	\texttt{alex@example.com}
+  Alex\\	s4125304\\	\texttt{alex.kolmus@student.ru.nl}
 }
 \date{\today}
 
@@ -50,11 +50,27 @@ There is one copy of the current best member, which has fitness 157.
 
 	\begin{enumerate}
 		\item What is the expectation for the number of copies of the best individual in the mating pool?\\
-		\textbf{Solution:}\\
+		\textbf{Solution:}
 		
-		\item What is the probability that there will be no copis of the best individual in the mating pool?\\
-		\textbf{Solution:}\\
+\begin{align*}
+	\text{Pop\_size} &= 100\notag\\
+	\text{t generations} \rightarrow \text{mean fitness} &= 76\notag\\
+	P(best) = \frac{157}{76 \cdot 100} &\approx 0.0207\notag\\
+	100 \cdot P(best) &\approx 2.07\notag
+\end{align*}	
 		
+		
+		\item What is the probability that there will be no copies of the best individual in the mating pool?\\
+		\textbf{Solution:}
+		
+\begin{align*}
+ P(\text{not\_best}) = 1 - P(best) &\approx 0.9793\notag\\
+ 100 \cdot P(\text{not\_best}) &\approx 97.93
+\end{align*}		
+		
+	
+
+	
 	
 	\end{enumerate}
 
@@ -63,6 +79,36 @@ There is one copy of the current best member, which has fitness 157.
 	\textbf{Solution:}\\	
 
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Function:} & $f$  & $f_1$ \\ \hline
+$x = 3$ & $x^2 = 9$ & $x^2 + 8 = 17$ \\ \hline
+$x = 5$ & $x^2 = 25$ & $x^2 + 8 = 33$ \\ \hline
+$x = 7$ & $x^2 = 49$ & $x^2 + 8 = 57$ \\ \hline
+\textbf{Sum:} & 83 & 107 \\ \hline
+\end{tabular}
+\end{table}
+
+
+\textbf{Probabilities for x squared:}	
+	
+\begin{align*}
+P(x = 3) &= \frac{9}{83} \approx 0.11\notag\\
+P(x = 5) &= \frac{25}{83} \approx 0.30\notag\\
+P(x = 7) &= \frac{49}{83} \approx 0.59\notag
+\end{align*}	
+	
+\textbf{Probabilities for x squared plus eight:}	
+
+\begin{align*}
+P(x = 3) &= \frac{17}{107} \approx 0.16\notag\\
+P(x = 5) &= \frac{33}{107} \approx 0.33\notag\\
+P(x = 7) &= \frac{57}{107} \approx 0.53\notag
+\end{align*}	
+
+Function $f_1$ has a lower selection pressure, fitter individuals have a lower probability of getting selected.\\
 
 	% Task 3
 	\item The Counting Ones problem amounts to find a bit string whose sum of its entries is maximum. This easy problem is used to illustrate the difference between Monte-Carlo search and a simple genetic algorithm.\\
