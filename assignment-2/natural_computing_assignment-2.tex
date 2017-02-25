@@ -29,7 +29,7 @@
 \author{
   Christoph Schmidl\\ s4226887\\      \texttt{c.schmidl@student.ru.nl}
   \and
-  Koen Vijverberg\\ s1337\\     \texttt{koen@example.com}
+  Koen Vijverberg\\ s4132858\\     \texttt{koen.vijverberg@student.ru.nl}
   \and
   Alex\\	s4125304\\	\texttt{alex.kolmus@student.ru.nl}
 }
@@ -49,15 +49,27 @@
 	\begin{enumerate}
 		\item[1.] Compute the area under the receiver operating characteristic cuve (AUC) to quantify how well the negative selection algorithm with parameters $n = 10, r = 4$ discriminates individual English string from Tagalog strings by using the files \textbf{english.train} for training and \textbf{english.test} as well as tagalog.test for testing.\\
 		\textbf{Solution:}\\
-		
-		
+		For $n = 10, r = 4$ the $AUC = 0.79$
+		\begin{figure}[H]
+	    \centering
+  	    \includegraphics[width=0.8\textwidth]{images/ROC_exercise_1.png}
+  	    \caption{The ROC curve plot for different values of $r$, the subsequent character matching parameter}
+	    \end{figure}
 		
 		\item[2.] How does the AUC change when you modify the paramter $r$? Specifically, what behavior do you observe at $r = 1$ and $r = 9$ and how can you explain this behaviour? Which value of $r$ leads to the best discrimination?\\
 		\textbf{Solution:}\\
 		
+		See figure 1, the AUC is in both edge cases ($r = 1$ and $r = 9$) close to 0.5, a.k.a. not better than random guessing. Best value is for $r = 3$ with an $AUC = 0.83$. \\
+		
 		\item[3.] The folder \textbf{lang} contains strings from 4 other languages. Determine which of these languages can be best discriminated from English using the negative selection algorithm, and for which of the languages this is most difficult. Can you explain your findings?\\
 		\textbf{Solution:}\\
 		
+		Xhosa is easiest discriminated (best AUC score), worst is middle-english, which seems reasonable because it is probably similar to the normal english language.
+		\begin{figure}[H]
+	    \centering
+  	    \includegraphics[width=0.8\textwidth]{images/ROC_exercise_1_langs.png}
+  	    \caption{Best ROC curves per language}
+	    \end{figure}
 			
 	\end{enumerate}		
 	

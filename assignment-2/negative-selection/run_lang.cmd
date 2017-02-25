@@ -1,0 +1,1 @@
+FOR %%G IN (1,2,3,4,5,6,7,8,9) DO (java -jar negsel2.jar -self english.train -n 10 -r %%G -c -l < lang/xhosa.txt > xhosa_r_%%G.txt)
