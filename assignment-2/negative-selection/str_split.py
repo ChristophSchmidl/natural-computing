@@ -90,12 +90,12 @@ def main(sp_sz, path_train):
 			if (len(split_line[-1]) == sp_sz):
 				for item in split_line:
 					new_tfile.write(item + '\n')
-					new_lfile.write(str(i) + ', ' + str(lbl) + '\n')
+					new_lfile.write(str(i) + '\n')
 			else:
 				split_line[-1] = split_line[-1] + "-" * (sp_sz - len(split_line[-1]))
 				for item in split_line:
 					new_tfile.write(item + '\n')
-					new_lfile.write(str(i) + ', ' + str(lbl) + '\n')
+					new_lfile.write(str(i) + '\n')
 		
 		new_tfile.close()
 		new_lfile.close()
