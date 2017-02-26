@@ -42,7 +42,7 @@ def main(sp_sz, path_train):
 			for item in split_line:
 				new_file.write(item + '\n')
 		else:
-			split_line[-1] = split_line[-1] + "_" * (sp_sz - len(split_line[-1]))
+			split_line[-1] = split_line[-1] + "-" * (sp_sz - len(split_line[-1]))
 			for item in split_line:
 				new_file.write(item + '\n')
 	new_file.close()
@@ -92,7 +92,7 @@ def main(sp_sz, path_train):
 					new_tfile.write(item + '\n')
 					new_lfile.write(str(i) + ', ' + str(lbl) + '\n')
 			else:
-				split_line[-1] = split_line[-1] + "_" * (sp_sz - len(split_line[-1]))
+				split_line[-1] = split_line[-1] + "-" * (sp_sz - len(split_line[-1]))
 				for item in split_line:
 					new_tfile.write(item + '\n')
 					new_lfile.write(str(i) + ', ' + str(lbl) + '\n')
