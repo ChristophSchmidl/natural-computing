@@ -3,7 +3,7 @@ import glob
 import textwrap
 
 def main(sp_sz, path_train):
-	print 'working'
+	print('working')
 	
 	#
 	# ACT ON TRAINING FILE
@@ -91,11 +91,11 @@ def main(sp_sz, path_train):
 		new_tfile.close()
 		new_lfile.close()
 		
-	print 'Done'
+	print('Done')
 		
 if (__name__ == '__main__'):
 	if (len(sys.argv) != 3):
-		print 'Please give us the split size and training file path'
+		print('Please give us the split size and training file path')
 		# EXAMPLE: python str_split.py 5 /home/lumos/University/NC/natural-computing/assignment-2/negative-selection/syscalls/snd-unm/snd-unm.train
 
 	else:
