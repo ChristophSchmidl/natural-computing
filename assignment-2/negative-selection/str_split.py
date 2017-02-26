@@ -2,6 +2,15 @@ import sys, os
 import glob
 import textwrap
 
+def split_str(seq, chunk, skip_tail=False):
+    lst = []
+    if chunk <= len(seq):
+        lst.extend([seq[:chunk]])
+        lst.extend(split_str(seq[chunk:], chunk, skip_tail))
+    elif not skip_tail and seq:
+        lst.extend([seq])
+    return lst
+
 def main(sp_sz, path_train):
 	print('working')
 	
@@ -27,7 +36,7 @@ def main(sp_sz, path_train):
 	# SPLIT LIST AND CREATE NEW TRAINING FILE IN MAP SPECIFIED BY SIZE	
 	new_file = open(new_loc + '/sys_train.train', 'w')
 	for line in linelist:
-		split_line = textwrap.wrap(line, sp_sz)
+		split_line = split_str(line, sp_sz, skip_tail=False)
 		# REMOVE LAST PART IF IT DOESNT FIT IN THE SPECIFIED SIZE
 		if (len(split_line[-1]) == sp_sz):
 			for item in split_line:
@@ -76,7 +85,7 @@ def main(sp_sz, path_train):
 			lbl = lbllist[i]
 			
 			# SPLIT THE LINE 
-			split_line = textwrap.wrap(linelist[i], sp_sz)
+			split_line = split_str(linelist[i], sp_sz, skip_tail=False)
 			# REMOVE LAST PART IF IT DOESNT FIT IN THE SPECIFIED SIZE
 			if (len(split_line[-1]) == sp_sz):
 				for item in split_line:
