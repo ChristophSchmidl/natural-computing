@@ -57,10 +57,9 @@ def main(argv):
     print("*** Single Threaded ***")
     number_of_ants = 10
     number_of_steps = 10
-    alpha = 1  # importance of pheromone trail
+    alpha = 0.5  # importance of pheromone trail
     #beta = 0.5  # importance of heuristic value (heurisitc value = probability of selecting digit at position (x,y))
     rho = 0.002  # level of evaporation. Between 0(none) and 1(full evaporation)
-
 
     beta_values = [0, 0.5, 1, 1.5, 2]
     sudoku_files = [s10a, s10b, s11a, s11b]

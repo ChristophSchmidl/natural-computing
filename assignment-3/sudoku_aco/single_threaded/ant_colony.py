@@ -24,19 +24,14 @@ class AntColony:
         self.pheromone_matrix = None
         self.global_best_score = 0
         self.global_best_solution = None
-        self.best_path_arr = None
 
         self.base_score = calculate_score(sudoku_matrix)
         self.best_score_statistics = []
         self.average_score_statistics = []
 
-        # initial pheromone on 3 dimensional matrix on nodes which are available at the beginning
-        # therefore, compute all available positions in the array and set the pheromones to 1
-
     def reset(self):
         self.global_best_score = 0
         self.global_best_solution = None
-        self.best_path_arr = None
         self.ants = []
 
     def _create_ants(self):
