@@ -62,26 +62,62 @@ To facilitate calculation, we will ignore the fact that $r_1$ and $r_2$ are rand
 \begin{enumerate}
 	% 1a)
 	\item What would be the next position of each particle after one iteration of the PSO algorithm with $w = 2$?\\
-	\textbf{Solution:}\\
+	\textbf{Solution:}
+	\begin{align*}
+	    x(i, 2) = x(i, 1) + v(i, 1)
+	\end{align*}
+	\begin{align*}
+	\text{for $i = 1$ we obtain:}\\
+	    v(1,1) &= w(2,2) + r_1((5,5) - (5,5)) + r_2((5,5) - (5,5))\\
+	           &= (2w,2w) \rightarrow (4,4)\\
+	   x(1,2) &= (5,5) + (4,4) = (9,9)\\
+	\text{for $i = 2$ we obtain:}\\
+	    v(2,1) &= w(3,3) + r_1((7,3) - (8,3)) + r_2((5,5) - (8,3))\\
+	           &= (3w,3w) + r_1(-1,0) + r_2(-3, 2) = (3w - r_1 - 3r_2, 3w + 2r_2) \rightarrow (4, 7)\\
+	   x(2,2) &= (8,3) + (4,7) = (12, 11)\\
+	\text{for $i = 3$ we obtain:}\\
+	    v(3,1) &= w(4,4) + r_1((5,6) - (6,7)) + r_2((5,5) - (6,7))\\
+	           &= (4w,4w) + r_1(-1,-1) + r_2(-1, -2) = (4w - r_1 - r_2, 4w - r_1 - 2r_2) \rightarrow (7, 6.5)\\
+	   x(3,2) &= (6,7) + (7, 6.5) = (13, 13.5)
+	\end{align*}
+	
 	
 	% 1b)
 	\item And using $w = 0.1$?\\
 	\textbf{Solution:}\\
-	
+	Using the analytical solutions of the previous exercise we obtain for $w = 0.1$ the following solutions:
+	\begin{align*}
+	    \text{for $i = 1$ we obtain:}\\
+	    v(1,1) &= (2w, 2w) \rightarrow (0.2, 0.2)\\
+	    x(1,2) &= (5,5) + (0.2, 0.2) = (5.2, 5.2)\\
+	    \text{for $i = 2$ we obtain:}\\
+	    v(2,1) &= (3w - r_1 - 3r_2, 3w + 2r_2) \rightarrow (-1.2, 1.3)\\
+	    x(2,2) &= (8,3) + (-1.2, 1.3) = (6.8, 4.3)
+	    \text{for $i = 3$ we obtain:}\\
+	    v(3,1) &= (4w - r_1 - r_2, 4w - r_1 - 2r_2) \rightarrow (-0.6, -1.1)
+	    x(3,2) &= (6,7) + (-0.6
+	\end{align*}
 	% 1c)
 	\item Explain what is the effect of the parameter $w$.\\
 	\textbf{Solution:}\\
+	$w$ can be viewed as a `momentum' hyperparameter, it carries a factor (can be larger than 1) of the previous velocity into the next time step. So what are its effects? Lets focus on extremes, for $w = 0$ the swarm only takes 'local' information into account and is only busy with finding a local optimum (which might be the global optimum). For $w >> 1$ it almost completely ignores the local information and explores the solution space.\bigskip
+	
+	So small $w$ are focused on exploitation, while large $w$ are focused on exploration.
 	
 	% 1d)
 	\item Give an advantage and a disadvantage of a high value of $w$.\\
 	\textbf{Solution:}\\
+	\begin{enumerate}
+	    \item[Advantage] A large $w$ allows us to explore other local minimum and thus possibly finding a better solution.
+	    \item[Disadvantage] A large $w$ can prevent a solution from converging and thus having a very suboptimal end solution.
+	\end{enumerate}
 	
 \end{enumerate}
 
 	% Task 2
 	\item Consider a particle swarm consisting of a single member. How would it perform in a trivial task such as the minimization of $f(x) = x^2$ when $w < 1$?\\
 	\textbf{Solution:}\\
-	
+	Given that $r_1, r_2 > 0$ it would find a solution. Since $f(x)$ establishes a convex solution space the local information is enough to find the minimum (since local = global for convex spaces). What would happen would be somewhat similar to gradient descent with momentum ($<1$), it will be damped oscillator that eventually stops in the minimum.
 	
 	% Task 3
 	\item The figure shows an example from the ACO book by Dorigo and Stuetzle. What results do you expect for ant colony algorithm that does not use tabu lists (except for inhibition of immediate return to the previous node)?
@@ -93,13 +129,12 @@ To facilitate calculation, we will ignore the fact that $r_1$ and $r_2$ are rand
 	
 	
 	\textbf{Solution:}\\
-	
+	There are cycles possible in the bottom half of the graph that would make that route seem larger than the route through the top of the graph. I would expect that the (early) convergence would be that the ant colony takes the route trough the upper nodes and edges of the graph. After a lot of iterations it might find the fastest route through the bottom half of the graph (down, up, right, down, up).
 	
 	% Task 4
 	\item Assume that ants are allowed to lay pheromone on a path at every time step, so that pheromone update rule is applied at each time step. Come up with a combination local/global updating scheme that encourages exploration and exploitation - consider which parameters influence this.\\
 	\textbf{Solution:}\\
-	
-
+	A exploration solution might be that you keep track of a \%$global\_pheromone$\% parameter at each edge of the graph, copy that for each ant when it is at the source/start node to a \%$local\_pheromone$\% parameter which gets lowered as you travel down an edge to prevent re-taking routes. At edge intersections choose a path with a probability proportional to the amount of pheromone on it (and prevent re-tracing its previous step). As soon as you reach destination update the \%$global pheromone$\% proportional to the length of the path taken. Set minimum and maximum levels of pheromone to enable exploration.
 
 
 	% Task 5
@@ -112,7 +147,7 @@ To facilitate calculation, we will ignore the fact that $r_1$ and $r_2$ are rand
 		
 		
 		% 5b)
-		\item Consider the benchmark Sudoku problems are available at \url{http://lipas.uwasa.fi/~timan/sudoku/}. Run your ACO on the following benchmark instances \textsf{s10a.txt, s10b.txt, s11a.txt, s11b.txt}. Report and discuss the results.\\
+		\item Consider the benchmark Sudoku problems are available at \url{http://lipas.uwasa.fi/~timan/sudoku/}. Run your ACO on the following benchmark instances \textsf{10a.txt, s10b.txt, s11a.txt, s11b.txt}. Report and discuss the results.\\
 		 \textbf{Solution:}\\
 		
 		
