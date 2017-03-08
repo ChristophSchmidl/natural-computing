@@ -11,10 +11,10 @@
 \usepackage{titling}
 \usepackage{varwidth}
 \usepackage{hyperref}
+\usepackage{url}
 \usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
 \definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
 \definecolor{mylilas}{RGB}{170,55,241}
-
 
 
 \usepackage{geometry}
@@ -145,11 +145,74 @@ To facilitate calculation, we will ignore the fact that $r_1$ and $r_2$ are rand
 		\item Code an ACO to solve Sudoku's. First, you need to think how to represent Sudoku: there are three conditions an optimal solution must fulfill, each line must contain all integers $\{1,2,3,4,5,6,7,8,9 \}$ once and only once, the same applies to columns and 3x3 subgrids. You can fix one of them so that you will prevent violations. The ACO will have 9x9x9 pheromone matrix, where you update pheromones for the values appearing in the best solutions inversely proportionally to the fitness value. You have to consider also how the old pheromones will fade.\\
 		\textbf{Solution:}\\
 		
+		The code regarding this exercise can be found at our Git Repository:\\
+		\url{https://github.com/ChristophSchmidl/natural-computing/tree/master/assignment-3/sudoku_aco}\\
+	
+	    This exercise has been constructed in Python 3.5 in an object-oriented way. The main file to start the program and construct the benchmark-figures is \texttt{sudoku\_aco.py} The utility file \texttt{sudoku\_utils.py} is responsible for parsing the given txt-files and enforcing the rules of Sudoku. The AntColony class and Ant class are mainly responsible for executing the ACO algorithm. Both files can be found in the folder \texttt{single\_threaded}. We also tried to begin to program this exercise in a multi threaded manner because this algorithm can exploit parallelism in an extensive way but we did not manage to finish it in time.\\
+		
 		
 		% 5b)
 		\item Consider the benchmark Sudoku problems are available at \url{http://lipas.uwasa.fi/~timan/sudoku/}. Run your ACO on the following benchmark instances \textsf{10a.txt, s10b.txt, s11a.txt, s11b.txt}. Report and discuss the results.\\
 		 \textbf{Solution:}\\
 		
+		The benchmarks have been performed with the following parameters:
+		
+		\begin{itemize}
+		    \item Number of ants: 700
+		    \item Number of steps: 20
+		    \item Alpha (importance of pheromone trail): 1
+		    \item Beta: values between 0 and 2 
+		    \item Rho (evaporation): 0.002
+		\end{itemize}
+		
+		The focus of this benchmark has been a varying beta value which is a variation in importance of the heuristic value. The heuristic value gives information in how far an ant should choose a possible digit at a certain location based on a certain probability. By giving alpha a fixed value and let beta vary between value below and above alpha, we should expect different decision behaviours. These behaviours should vary between favouring pheromone trails, equal decisions and favouring heuristic values and therefore let ants more choose by randomness.
+		
+		% s10a
+    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/average_s10a.png}
+    	\end{figure}	
+    	
+    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/best_s10a.png}
+    	\end{figure}
+    	
+    	% s10b
+    	    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/average_s10b.png}
+    	\end{figure}	
+    	
+    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/best_s10b.png}
+    	\end{figure}
+    	
+    	% s11a
+    	    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/average_s11a.png}
+    	\end{figure}	
+    	
+    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/best_s11a.png}
+    	\end{figure}
+    	
+    	% s11b
+    	    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/average_s11b.png}
+    	\end{figure}	
+    	
+    	\begin{figure}[H]
+        	\centering
+          	\includegraphics[width=0.8\textwidth]{images/best_s11b.png}
+    	\end{figure}
+		
+		As we can see, the graphs strive against the possible optimal score of 81, which represents the score of a solved sudoku puzzle. It seems strange that the average score for all beta values is around 70 although the average score for low beta values should look different. A low beta value should lead to a more intensive incorporation of pheromone trails and therefore different averaged scores. As we look at the best scores, we can see that the algorithm rarely reaches the optimal value of 81 but that a beta value around 1.5 seems to give the best solutions so far.\\
+		Our program does not seem to give a quick solution to a sudoku puzzle and the average score graphs seem to give the impression that the ants are not considering the pheromone trails. We would have to inspect all paramters like number of ants, number of steps, evaporation rate and alpha/beta more thoroughly to give clearer insights on these findings.
 		
 		
 	\end{enumerate}

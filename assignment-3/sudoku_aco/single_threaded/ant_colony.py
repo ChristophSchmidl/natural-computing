@@ -2,6 +2,7 @@ import random
 import numpy as np
 import copy
 from sudoku_utils import *
+import matplotlib.pyplot as plt
 
 
 from single_threaded.ant import Ant
@@ -25,6 +26,10 @@ class AntColony:
         self.global_best_solution = None
         self.best_path_arr = None
 
+        self.base_score = calculate_score(sudoku_matrix)
+        self.best_score_statistics = []
+        self.average_score_statistics = []
+
         # initial pheromone on 3 dimensional matrix on nodes which are available at the beginning
         # therefore, compute all available positions in the array and set the pheromones to 1
 
@@ -39,7 +44,6 @@ class AntColony:
             self.ants.append(Ant(ant_id, self.alpha, self.beta, self.sudoku_matrix, self.pheromone_matrix))
 
     def run(self):
-
         self._create_pheromone_matrix()
         self._create_ants()
 
@@ -47,11 +51,13 @@ class AntColony:
         for step in range(self.number_of_steps):
             # inner loop: let every ant search for a solution
             print("Step number: {}".format(step))
+            summed_score = 0
             for ant in self.ants:
                 # every ants solution modifies the pheromone_matrix,
                 # so that the next ant in line can leverage the findings
                 # of the previous ant
                 self._add_pheromone(ant.find_solution(), ant.get_score())
+                summed_score += ant.score
                 if ant.score > self.global_best_score:
                     self.global_best_solution = ant.solution
                     self.global_best_score = ant.score
@@ -59,6 +65,8 @@ class AntColony:
                     self.print_current_best_sudoku_matrix()
                     self._check_for_highscore()
                 ant.reset()  # So that the ant can be used again without its previous values
+            self.average_score_statistics.append(summed_score / self.number_of_ants)
+            self.best_score_statistics.append(self.global_best_score)
 
             # at the end of one step, every ant came up with a solution
             # and now the evaporation step/global update can take place
@@ -95,7 +103,7 @@ class AntColony:
     def _check_for_highscore(self):
         if self.global_best_score == 81:
             self.print_current_best_sudoku_matrix()
-            exit()
+
 
     def print_current_best_sudoku_matrix(self):
 
@@ -103,5 +111,3 @@ class AntColony:
         for solution in self.global_best_solution:
             set_digit_at_position(solution[0], solution[1], solution[2], solution_matrix)
         print(solution_matrix)
-
-

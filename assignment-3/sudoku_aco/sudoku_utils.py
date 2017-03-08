@@ -1,5 +1,4 @@
 import numpy as np
-from node import Node
 
 def get_row(index, arr):
     return arr[index, :]
