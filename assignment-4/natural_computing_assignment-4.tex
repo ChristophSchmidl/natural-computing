@@ -81,8 +81,8 @@
             \includegraphics[width=.15\linewidth]{./images/task1c.PNG}%
           }
     \end{minipage}
-    \vspace{1em}	
-    \textbf{Solution:}\\	
+    \vspace{1em}		
+        \textbf{Solution:}\\
 		
 		
 		
@@ -192,12 +192,26 @@
 	
 	% Task 5
 	\item Download and run the Game of Life simulator from \url{https://bitstorm.org/gameoflife/} Select "Small Exploder" from the menu, click start and wait until a stable state is eached. Explain why this state remains static.\\
-	\textbf{Solution:}\\
+	\textbf{Solution:}\\\\
+	The static state looks like this:
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.7\textwidth]{images/ex_5_small_exploder.png}
+	\end{figure}
 	
-
+	These structures are identical except for their orientation, we will reason about one of them, which translates to all others. The game of life has the following rules:
+	\begin{itemize}
+	    \item If a node is alive, and has two or three alive neighbours it stays alive
+	    \item If a node is dead, it becomes alive if it has exactly three living neighbours.
+	\end{itemize}
+	
+	We see the following properties in one of the observed static structures:
+	\begin{itemize}
+	    \item The two dead cells inside have five neighbours each, thus remain dead.
+	    \item The alive cells each have two neighbours, thus remain alive.
+	    \item The cells around the structure have a maximum of two connected living cells, thus remain dead.
+	\end{itemize}
+	These properties combined result in the structure remaining in a stable/static state.
+	
 \end{enumerate}
-
-
-
-
 \end{document}
