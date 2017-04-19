@@ -62,15 +62,40 @@
 	\item Draw the network.\\
 	\textbf{Solution:}\\
 	
-	
-	
-	
+	On the left side are the expected data dims, on the right side the operations performed.
+	\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.7\textwidth]{images/CNN_ex_1.png}
+	\end{figure}
 	
 	
 	
 	
 	\item Calculate the response of the CNN for the two inputs (0;0;0;0;1;1;1;1;0;0;0;0) and (1;1;1;1;0;0;0;0;1;1;1;1).\\
-	\textbf{Solution:}\\
+	\textbf{Solution:}\\ \\
+	Filter sizes are applied in order mentioned in the exercise. For the fully-connected (FC) layer the positive sum is computed first.
+	\begin{center}
+    \begin{tabular}{| l | p{5cm} |}
+    \hline
+    Input & (0;0;0;0;1;1;1;1;0;0;0;0) \\ \hline
+    Conv\_1: & (0;0;1;1;0;0;-1;-1;0;0) \newline (0;0;-1;-1;0;0;1;1;0;0) \\ \hline
+    MaxPool: & (0;1;0;-1;0) \newline (0;-1;0;1;0) \\ \hline
+    Conv\_2: & (0;-4;0) \\ \hline
+	FC: & (-4;4) \\ \hline
+	Activation: & (0.018;0.982) \\ \hline
+    \end{tabular}
+    \end{center}
+    \begin{center}
+    \begin{tabular}{| l | p{5cm} |}
+    \hline
+    Input & (1;1;1;1;0;0;0;0;1;1;1;1) \\ \hline
+    Conv\_1: & (0;0;-1;-1;0;0;1;1;0;0) \newline (0;0;1;1;0;0;-1;-1;0;0) \\ \hline
+    MaxPool: & (0;-1;0;1;0) \newline (0;1;0;-1;0) \\ \hline
+    Conv\_2: & (0;4;0) \\ \hline
+	FC: & (4;-4) \\ \hline
+	Activation: & (0.982;0.018) \\ \hline
+    \end{tabular}
+    \end{center}
 	
 \end{enumerate}	
 
@@ -89,12 +114,13 @@ Consider the practical assignment of:
 	% Task 2a)
 	\item implementing layers of a CNN (ConvolutionalNeuralNetworks.ipynb)\\
 	\textbf{Solution:}\\
-	
+	See submitted archive file.
 	
 	
 	% Task 2b)
 	\item modifying a simple architecture of a CNN to achieve higher accuracy on the MNIST dataset (mnist.ipynb)\\
 	\textbf{Solution:}\\
+	See submitted archive file
 	
 \end{enumerate}
 	
