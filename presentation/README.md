@@ -67,9 +67,21 @@ Equation 5, right side:
 
 ## 4 Mean-only Batch Normalization
 
+Equation 7, left side:
 
+![Equation7_1](img/4_mean-only_batch_normalization/eq_7_1.PNG)
 
+Equation 7, middle:
 
+![Equation7_2](img/4_mean-only_batch_normalization/eq_7_2.PNG)
+
+Equation 7, right side:
+
+![Equation7_3](img/4_mean-only_batch_normalization/eq_7_3.PNG)
+
+Equation 8:
+
+![Equation8](img/4_mean-only_batch_normalization/eq_8.PNG)
 
 ## 5 Experiments
 
