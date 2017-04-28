@@ -89,25 +89,44 @@ Equation 8:
 
 ### 5.1 Supervised Classification: CIFAR-10
 
+Figure 1:
 
+![Figure1](img/5_1_supervised_classification_cifar-10/fig_1.PNG)
+
+Figure 2:
+
+![Figure2](img/5_1_supervised_classification_cifar-10/fig_2.PNG)
 
 
 ### 5.2 Generative Modelling: Convolutional VAE
 
+Figure 3, left side:
+
+![Figure3_1](img/5_2_generative_modelling_convolutional_VAE/fig_3_1.PNG)
 
 
+Figure 3, right side: 
 
+![Figure3_2](img/5_2_generative_modelling_convolutional_VAE/fig_3_2.PNG)
 
 
 ### 5.3 Generative Modelling: DRAW
 
+Figure 4: 
 
+![Figure4](img/5_3_generative_modelling_DRAW/fig_4.PNG)
 
 
 
 ### 5.4 Reinforcement Learning: DQN
 
+Figure 5: 
 
+![Figure5](img/5_4_reinforcement_learning_DQN/fig_5.PNG)
+
+Figure 6: 
+
+![Figure6](img/5_4_reinforcement_learning_DQN/fig_6.PNG)
 
 
 ## 6 Conclusion
