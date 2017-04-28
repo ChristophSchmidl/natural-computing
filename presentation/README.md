@@ -39,7 +39,9 @@ Equation 4, right side:
 
 ### 2.2 Relation to batch normalization
 
+Unlisted equation regarding batch normalization:
 
+![Equation_unlisted](img/2_2_relation_to_batch_normalization/eq_unlisted.PNG)
 
 
 ## 3 Data-Dependent Initialization of Parameters
