@@ -13,7 +13,7 @@ Equation 1:
 
 Equation 2:
 
-![Equation2](img/2_weight_normalization/eq_1.PNG)
+![Equation2](img/2_weight_normalization/eq_2.PNG)
 
 
 ### 2.1 Gradients
