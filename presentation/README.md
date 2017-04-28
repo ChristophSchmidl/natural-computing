@@ -24,7 +24,7 @@ Equation 3, left side:
 
 Equation 3, right side:
 
-![Equation3_1](img/2_1_gradients/eq_3_2.PNG)
+![Equation3_2](img/2_1_gradients/eq_3_2.PNG)
 
 
 
@@ -34,7 +34,7 @@ Equation 4, left side:
 
 Equation 4, right side:
 
-![Equation4_1](img/2_1_gradients/eq_4_2.PNG)
+![Equation4_2](img/2_1_gradients/eq_4_2.PNG)
 
 
 ### 2.2 Relation to batch normalization
@@ -47,8 +47,22 @@ Unlisted equation regarding batch normalization:
 ## 3 Data-Dependent Initialization of Parameters
 
 
+Equation 5, left side:
+
+![Equation5_1](img/3_data-dependent_initialization_of_parameters/eq_5_1.PNG)
+
+Equation 5, right side:
+
+![Equation5_2](img/3_data-dependent_initialization_of_parameters/eq_5_2.PNG)
 
 
+Equation 6, left side:
+
+![Equation6_1](img/3_data-dependent_initialization_of_parameters/eq_6_1.PNG)
+
+Equation 5, right side:
+
+![Equation6_2](img/3_data-dependent_initialization_of_parameters/eq_6_2.PNG)
 
 
 ## 4 Mean-only Batch Normalization
